@@ -380,7 +380,7 @@ struct cfs_rq {
 	 */
 	struct sched_entity *curr, *next, *last;
 
-	unsigned int nr_spread_over;
+    unsigned int nr_spread_over;
 
 #ifdef CONFIG_FAIR_GROUP_SCHED
 	struct rq *rq;	/* cpu runqueue to which this cfs_rq is attached */
@@ -6508,6 +6508,10 @@ __setscheduler(struct rq *rq, struct task_struct *p, int policy, int prio)
 	case SCHED_RR:
 		p->sched_class = &rt_sched_class;
 		break;
+    case SCHED_OTHER_RR:
+        printk("SCHED OTHER RR HAS BEEN USED");
+        p->sched_class = &other_rr_sched_class;
+        break;
 	}
 
 	p->rt_priority = prio;
@@ -6532,7 +6536,7 @@ static bool check_same_owner(struct task_struct *p)
 	rcu_read_unlock();
 	return match;
 }
-
+/*LOOK HERE */
 static int __sched_setscheduler(struct task_struct *p, int policy,
 				struct sched_param *param, bool user)
 {
@@ -6556,7 +6560,7 @@ recheck:
 
 		if (policy != SCHED_FIFO && policy != SCHED_RR &&
 		policy != SCHED_NORMAL && policy != SCHED_BATCH &&
-		policy != SCHED_IDLE)
+        policy != SCHED_IDLE && policy != SCHED_OTHER_RR)
 			return -EINVAL;
 	}
 
