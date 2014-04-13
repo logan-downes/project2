@@ -1,4 +1,8 @@
 /*
+ * Adam Howell & Tarryn Schantell
+ * Round robin Scheduling
+ *
+ *
  *  kernel/sched.c
  *
  *  Kernel scheduler and related syscalls
