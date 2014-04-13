@@ -26,8 +26,6 @@
  *              Thomas Gleixner, Mike Kravetz
  */
 
-/*test comment*/
-
 #include <linux/mm.h>
 #include <linux/module.h>
 #include <linux/nmi.h>
