@@ -6507,6 +6507,11 @@ __setscheduler(struct rq *rq, struct task_struct *p, int policy, int prio)
 		p->sched_class = &rt_sched_class;
 		break;
 	}
+	case SCHED_OTHER_RR:
+		p->sched_class = &other_rr_sched_class;
+		printk("SCHED_OTHER_RR has been selected");
+		break;
+	}
 
 	p->rt_priority = prio;
 	p->normal_prio = normal_prio(p);
@@ -6554,7 +6559,7 @@ recheck:
 
 		if (policy != SCHED_FIFO && policy != SCHED_RR &&
 		policy != SCHED_NORMAL && policy != SCHED_BATCH &&
-		policy != SCHED_IDLE)
+		policy != SCHED_IDLE && policy !=SCHED_OTHER_RR)
 			return -EINVAL;
 	}
 
